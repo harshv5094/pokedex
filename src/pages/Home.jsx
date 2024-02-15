@@ -4,6 +4,7 @@ import {
   Grid,
   GridItem,
   Heading,
+  Image,
   Input,
   Link
 } from '@chakra-ui/react'
@@ -11,10 +12,12 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 function Home() {
-  const quantity = 20
+  const [quantity, setQuantity] = useState(40)
   const [pokeArray, setPokeArray] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
 
   const getAllPokemon = async quantity => {
+    setIsLoading(true)
     let pokeArray = []
     for (let i = 1; i <= quantity; i++) {
       try {
@@ -24,9 +27,11 @@ function Home() {
         pokeArray.push(response.data)
       } catch (error) {
         console.error(error)
+        setIsLoading(false)
       }
     }
     setPokeArray(pokeArray)
+    setIsLoading(false)
   }
 
   useEffect(() => {
@@ -35,15 +40,20 @@ function Home() {
 
   return (
     <Box>
-      {}
       <Heading m={'10px'} textAlign={'center'}>
         Welcome to my Pokedex
       </Heading>
 
-      <Box mx={{ lg: '15em', md: '10em', base: '5em', sm: '0em' }}>
+      <Box
+        display={'flex'}
+        flexDirection={{ lg: 'row', md: 'row', base: 'column', sm: 'column' }}
+        mx={{ lg: '15em', md: '10em', base: '5em', sm: '0em' }}
+        gap={5}
+      >
         <Heading size={'16px'}>Search</Heading>
         <Input
           size={'md'}
+          placeHolder={'Search Pokemon'}
           onChange={e => {
             if (e.target.value === '') {
               getAllPokemon(quantity)
@@ -54,6 +64,15 @@ function Home() {
                 )
               })
             }
+          }}
+        />
+        <Heading size={'16px'}>Quantity</Heading>
+        <Input
+          size={'md'}
+          placeHolder={'Enter Number Of Pokemon'}
+          value={quantity}
+          onChange={e => {
+            setQuantity(e.target.value)
           }}
         />
       </Box>
@@ -67,13 +86,22 @@ function Home() {
         gap={5}
         mx={{ lg: '10em', md: '5em', base: '0em', sm: '0em' }}
       >
+        {isLoading && (
+          <Box textAlign={'center'} height={'100vh'}>
+            Loading...
+          </Box>
+        )}
+
         {pokeArray.map((pokemon, index) => {
+          const pokemonFrontImage =
+            pokemon.sprites.other['official-artwork'].front_default
           return (
             <GridItem key={index}>
-              <Box border='green' borderWidth={'thick'}>
+              <Box border='green' borderWidth={'thick'} mx={5}>
+                <Image src={pokemonFrontImage} />
                 <Heading>{pokemon.name}</Heading>
                 <Link href={`/pokemon/${pokemon.id}`}>
-                  <Button colorScheme='green' size={`md`}>
+                  <Button mt={2} colorScheme='green' size={`md`}>
                     View Details
                   </Button>
                 </Link>
