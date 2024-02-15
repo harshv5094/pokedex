@@ -54,7 +54,7 @@ function Home() {
         <Heading size={'16px'}>Search</Heading>
         <Input
           size={'md'}
-          placeHolder={'Search Pokemon'}
+          placeholder={'Search Pokemon'}
           onChange={e => {
             if (e.target.value === '') {
               getAllPokemon(quantity)
@@ -70,7 +70,7 @@ function Home() {
         <Heading size={'16px'}>Quantity</Heading>
         <Input
           size={'md'}
-          placeHolder={'Enter Number Of Pokemon'}
+          placeholder={'Enter Quantity'}
           value={quantity}
           onChange={e => {
             setQuantity(e.target.value)
