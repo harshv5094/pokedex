@@ -8,8 +8,8 @@ function Loader({ isLoading }) {
           display={'flex'}
           justifyContent={'center'}
           alignItems={'center'}
-          width={{ lg: '80vw', md: '100vw', base: '100vw', sm: '100vw' }}
-          height={{ lg: '80vh', md: '80vh', base: '60vh', sm: '60vh' }}
+          width={'100vw'}
+          height={'100vh'}
         >
           <Box className='loader'></Box>
         </Box>
