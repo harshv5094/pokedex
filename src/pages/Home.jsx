@@ -1,4 +1,12 @@
-import { Box, Button, Grid, GridItem, Heading, Link } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  Grid,
+  GridItem,
+  Heading,
+  Input,
+  Link
+} from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
@@ -27,20 +35,49 @@ function Home() {
 
   return (
     <Box>
+      {}
       <Heading m={'10px'} textAlign={'center'}>
-        Home Page
+        Welcome to my Pokedex
       </Heading>
 
-      <Grid templateColumns={'repeat(3, 2fr)'} gap={5}>
+      <Box mx={{ lg: '15em', md: '10em', base: '5em', sm: '0em' }}>
+        <Heading size={'16px'}>Search</Heading>
+        <Input
+          size={'md'}
+          onChange={e => {
+            if (e.target.value === '') {
+              getAllPokemon(quantity)
+            } else {
+              setPokeArray(pokemon => {
+                return pokemon.filter(pokemon =>
+                  pokemon.name.includes(e.target.value.toLowerCase())
+                )
+              })
+            }
+          }}
+        />
+      </Box>
+      <Grid
+        templateColumns={{
+          lg: 'repeat(3, 1fr)',
+          md: 'repeat(2, 1fr)',
+          base: 'repeat(1, 1fr)',
+          sm: 'repeat(1, 1fr)'
+        }}
+        gap={5}
+        mx={{ lg: '10em', md: '5em', base: '0em', sm: '0em' }}
+      >
         {pokeArray.map((pokemon, index) => {
           return (
             <GridItem key={index}>
-              <Heading>{pokemon.name}</Heading>
-              <Link href={`/pokemon/${pokemon.id}`}>
-                <Button colorScheme='green' size={`md`}>
-                  View Details
-                </Button>
-              </Link>
+              <Box border='green' borderWidth={'thick'}>
+                <Heading>{pokemon.name}</Heading>
+                <Link href={`/pokemon/${pokemon.id}`}>
+                  <Button colorScheme='green' size={`md`}>
+                    View Details
+                  </Button>
+                </Link>
+              </Box>
             </GridItem>
           )
         })}

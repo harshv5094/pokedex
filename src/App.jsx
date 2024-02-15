@@ -4,6 +4,7 @@ import NotFound from './pages/NotFound'
 import PokemonInfo from './pages/PokemonInfo'
 import Home from './pages/Home'
 import Header from './components/header'
+import Footer from './components/footer'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path='/*' element={<NotFound />} />
         <Route path='/pokemon/:pokemonID' element={<PokemonInfo />} />
       </Routes>
+      <Footer />
     </div>
   )
 }
