@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import Loader from '../components/loader'
 
 function Home() {
   const [quantity, setQuantity] = useState(40)
@@ -86,11 +87,7 @@ function Home() {
         gap={5}
         mx={{ lg: '10em', md: '5em', base: '0em', sm: '0em' }}
       >
-        {isLoading && (
-          <Box textAlign={'center'} height={'100vh'}>
-            Loading...
-          </Box>
-        )}
+        {isLoading && <Loader isLoading={isLoading} />}
 
         {pokeArray.map((pokemon, index) => {
           const pokemonFrontImage =
