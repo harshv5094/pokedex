@@ -96,6 +96,7 @@ function Home() {
             <GridItem key={index}>
               <Box border='green' borderWidth={'thick'} mx={5}>
                 <Image
+                  loading='lazy'
                   src={pokemonFrontImage}
                   style={{
                     filter: 'drop-shadow(30px 10px 4px hsl(240, 69%, 57%))'
