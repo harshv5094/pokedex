@@ -95,7 +95,13 @@ function Home() {
           return (
             <GridItem key={index}>
               <Box border='green' borderWidth={'thick'} mx={5}>
-                <Image src={pokemonFrontImage} />
+                <Image
+                  src={pokemonFrontImage}
+                  style={{
+                    filter: 'drop-shadow(30px 10px 4px hsl(240, 69%, 57%))'
+                  }}
+                  alt={pokemon.name}
+                />
                 <Heading>{pokemon.name}</Heading>
                 <Link href={`/pokemon/${pokemon.id}`}>
                   <Button mt={2} colorScheme='green' size={`md`}>
