@@ -11,6 +11,7 @@ import {
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Loader from '../components/loader'
+import { NavLink } from 'react-router-dom'
 
 function Home() {
   const [quantity, setQuantity] = useState(40)
@@ -86,13 +87,14 @@ function Home() {
           sm: 'repeat(1, 1fr)'
         }}
         gap={5}
+        my={5}
         mx={{ lg: '10em', md: '5em', base: '0em', sm: '0em' }}
       >
         {pokeArray.map((pokemon, index) => {
           const pokemonFrontImage =
             pokemon.sprites.other['official-artwork'].front_default
           return (
-            <GridItem key={index}>
+            <GridItem border={'2px solid black'} p={2} key={index}>
               <Box border='green' borderWidth={'thick'} mx={5}>
                 <Image
                   loading='lazy'
@@ -103,7 +105,7 @@ function Home() {
                   alt={pokemon.name}
                 />
                 <Heading>{pokemon.name}</Heading>
-                <Link href={`/pokemon/${pokemon.id}`}>
+                <Link as={NavLink} to={`/pokemon/${pokemon.id}`}>
                   <Button mt={2} colorScheme='green' size={`md`}>
                     View Details
                   </Button>
