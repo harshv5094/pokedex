@@ -14,6 +14,7 @@ import { Link, NavLink, useParams } from 'react-router-dom'
 function PokemonInfo() {
   let { pokemonID } = useParams()
   const [pokemon, setPokemon] = useState({})
+  const [pokemonMoves, setPokemonMoves] = useState({})
 
   async function getPokemon(i) {
     try {
@@ -22,8 +23,9 @@ function PokemonInfo() {
       setPokemon({
         id: pokemonData.id,
         name: pokemonData.name,
-        base_error: pokemonData.base_experience,
+        base_experience: pokemonData.base_experience,
         height: pokemonData.height,
+        type: pokemonData.types[0].type.name,
         weight: pokemonData.weight,
         image: pokemonData.sprites.other['official-artwork'].front_default
       })
@@ -31,6 +33,7 @@ function PokemonInfo() {
       console.error(error)
     }
   }
+
   useEffect(() => {
     getPokemon(pokemonID)
   }, [pokemonID])
@@ -67,9 +70,21 @@ function PokemonInfo() {
         </GridItem>
         <GridItem border={'2px solid #000000'}>
           <Heading textAlign={'center'}>{pokemon.name}</Heading>
-          <Container overflow={'auto'} size={'md'}>
-            weight: {pokemon.weight}
-          </Container>
+
+          <Box overflowY={'auto'}>
+            <Box mx={'1em'} my={4} fontWeight={'600'}>
+              Basic Information:
+              <Container size={'sm'}>Height: {pokemon.height}</Container>
+              <Container size={'sm'}>Weight: {pokemon.weight}</Container>
+              <Container size={'sm'}>
+                Base Experience: {pokemon.base_experience}
+              </Container>
+              <Container size={'sm'}>Type: {pokemon.type}</Container>
+            </Box>
+            <hr />
+            {/* <Box>Column 2</Box> */}
+          </Box>
+
           <Container textAlign={'center'}>
             <Link as={NavLink} to={'/'}>
               <Button mt={2} colorScheme='blue' size={'md'}>
