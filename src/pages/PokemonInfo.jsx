@@ -21,7 +21,6 @@ function PokemonInfo() {
     setIsLoading(true)
     try {
       const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`)
-      const gender = await axios.get(` https://pokeapi.co/api/v2/gender/${i}`)
       const form = await axios.get(
         ` https://pokeapi.co/api/v2/pokemon-form/${i}`
       )
@@ -33,8 +32,7 @@ function PokemonInfo() {
         height: pokemonData.height,
         type: pokemonData.types[0].type.name,
         weight: pokemonData.weight,
-        image: pokemonData.sprites.other['official-artwork'].front_default,
-        gender: gender.data.name
+        image: pokemonData.sprites.other['official-artwork'].front_default
       })
       setIsLoading(false)
     } catch (error) {
@@ -90,7 +88,6 @@ function PokemonInfo() {
                 Base Experience: {pokemon.base_experience}
               </Container>
               <Container size={'sm'}>Type: {pokemon.type}</Container>
-              <Container size={'sm'}>Gender: {pokemon.gender}</Container>
             </Box>
           </Box>
 
