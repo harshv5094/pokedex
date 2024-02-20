@@ -10,12 +10,15 @@ import {
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useParams } from 'react-router-dom'
+import Loader from '../components/loader'
 
 function PokemonInfo() {
   let { pokemonID } = useParams()
   const [pokemon, setPokemon] = useState({})
+  const [isLoading, setIsLoading] = useState(false)
 
   async function getPokemon(i) {
+    setIsLoading(true)
     try {
       const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`)
       const gender = await axios.get(` https://pokeapi.co/api/v2/gender/${i}`)
@@ -33,8 +36,10 @@ function PokemonInfo() {
         image: pokemonData.sprites.other['official-artwork'].front_default,
         gender: gender.data.name
       })
+      setIsLoading(false)
     } catch (error) {
       console.error(error)
+      setIsLoading(false)
     }
   }
 
@@ -48,6 +53,7 @@ function PokemonInfo() {
         Pokemon Information
       </Heading>
 
+      {isLoading && <Loader isLoading={isLoading} />}
       <Grid
         templateColumns={{
           lg: 'repeat(2, 1fr)',
