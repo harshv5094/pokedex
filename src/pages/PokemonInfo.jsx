@@ -14,11 +14,14 @@ import { Link, NavLink, useParams } from 'react-router-dom'
 function PokemonInfo() {
   let { pokemonID } = useParams()
   const [pokemon, setPokemon] = useState({})
-  const [pokemonMoves, setPokemonMoves] = useState({})
 
   async function getPokemon(i) {
     try {
       const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`)
+      const gender = await axios.get(` https://pokeapi.co/api/v2/gender/${i}`)
+      const form = await axios.get(
+        ` https://pokeapi.co/api/v2/pokemon-form/${i}`
+      )
       const pokemonData = response.data
       setPokemon({
         id: pokemonData.id,
@@ -27,7 +30,8 @@ function PokemonInfo() {
         height: pokemonData.height,
         type: pokemonData.types[0].type.name,
         weight: pokemonData.weight,
-        image: pokemonData.sprites.other['official-artwork'].front_default
+        image: pokemonData.sprites.other['official-artwork'].front_default,
+        gender: gender.data.name
       })
     } catch (error) {
       console.error(error)
@@ -80,9 +84,8 @@ function PokemonInfo() {
                 Base Experience: {pokemon.base_experience}
               </Container>
               <Container size={'sm'}>Type: {pokemon.type}</Container>
+              <Container size={'sm'}>Gender: {pokemon.gender}</Container>
             </Box>
-            <hr />
-            {/* <Box>Column 2</Box> */}
           </Box>
 
           <Container textAlign={'center'}>
