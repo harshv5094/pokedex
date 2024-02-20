@@ -21,9 +21,6 @@ function PokemonInfo() {
     setIsLoading(true)
     try {
       const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`)
-      const form = await axios.get(
-        ` https://pokeapi.co/api/v2/pokemon-form/${i}`
-      )
       const pokemonData = response.data
       setPokemon({
         id: pokemonData.id,
