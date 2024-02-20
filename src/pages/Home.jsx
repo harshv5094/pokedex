@@ -14,7 +14,7 @@ import Loader from '../components/loader'
 import { NavLink } from 'react-router-dom'
 
 function Home() {
-  const [quantity, setQuantity] = useState(40)
+  const [quantity, setQuantity] = useState(20)
   const [pokeArray, setPokeArray] = useState([])
   const [isLoading, setIsLoading] = useState(false)
 
@@ -104,7 +104,9 @@ function Home() {
                   }}
                   alt={pokemon.name}
                 />
+
                 <Heading>{pokemon.name}</Heading>
+
                 <Link as={NavLink} to={`/pokemon/${pokemon.id}`}>
                   <Button mt={2} colorScheme='green' size={`md`}>
                     View Details
