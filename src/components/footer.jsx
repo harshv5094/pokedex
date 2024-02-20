@@ -1,4 +1,4 @@
-import { Box, Container, Image } from '@chakra-ui/react'
+import { Box, Container } from '@chakra-ui/react'
 import { SocialIcon } from 'react-social-icons'
 
 function Footer() {
@@ -12,7 +12,7 @@ function Footer() {
         bottom={0}
       >
         <Container textColor={'hsl(219, 52%, 44%)'} fontWeight={'700'}>
-          © 2024 Harsh Vyapari. All Rights Reserved.
+          &copy; {new Date().getFullYear()} Harsh Vyapari. All Rights Reserved.
         </Container>
         <br />
         <Container display={'flex'} justifyContent={'center'} gap={3}>
