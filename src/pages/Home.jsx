@@ -14,7 +14,7 @@ import Loader from '../components/loader'
 import { NavLink } from 'react-router-dom'
 
 function Home() {
-  const [quantity, setQuantity] = useState(20)
+  const [quantity, setQuantity] = useState(30)
   const [pokeArray, setPokeArray] = useState([])
   const [isLoading, setIsLoading] = useState(false)
 
